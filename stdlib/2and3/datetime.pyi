@@ -3,11 +3,24 @@
 #import sys
 from time import struct_time
 from typing import (
-    Hashable, Optional, SupportsAbs, Tuple,
+    Hashable, Optional, SupportsAbs, Tuple, Union,
+    Generic, TypeVar,
     overload,
 )
 
+# TODO replace when mypy#1775
+_tzinfo = tzinfo
+_date = date
+_time = time
+
 #_T = TypeVar('_T', None, timedelta)
+
+# TODO uncomment when mypy#1898
+#_AwareTz = TypeVar('_AwareTz', timedelta, None)
+#_Aware = TypeVar('_Aware', tzinfo[timedelta], None)
+# TODO NotImplemented is added to workaround mypy#1637
+_AwareTz = Union[timedelta, None, NotImplemented]
+_Aware = Union[tzinfo, None, NotImplemented]
 
 MINYEAR = ...  # type: int
 MAXYEAR = ...  # type: int
@@ -93,24 +106,33 @@ class datetime(Hashable):
     resolution = ...  # type: timedelta
     def __init__(self, year: int, month: int, day: int, hour: int = ...,
                  minute: int = ..., second: int = ..., microsecond: int = ...,
-                 tzinfo: Optional[tzinfo] = ...) -> None: ...
+                 tzinfo: _Aware = ...) -> None: ...
     @classmethod
-    def today(cls) -> datetime: ...
+    def today(cls) -> datetime: ...  # -> naive
+    @overload
     @classmethod
-    def now(cls, tz: Optional[tzinfo] = ...) -> datetime: ...
+    def now(cls, tz: tzinfo) -> datetime: ...  # -> aware
+    @overload
     @classmethod
-    def utcnow(cls) -> datetime: ...
+    def now(cls) -> datetime: ...  # -> naive
+    @classmethod
+    def utcnow(cls) -> datetime: ...  # -> naive
+    @overload
     @classmethod
     def fromtimestamp(cls, timestamp: float,
-                      tz: Optional[timezone] = ...) -> datetime: ...
+                      tz: timezone) -> datetime: ...  # -> aware
+    @overload
     @classmethod
-    def utcfromtimestamp(cls, timestamp: float) -> datetime: ...
+    def fromtimestamp(cls, timestamp: float) -> datetime: ...  # -> naive
     @classmethod
-    def fromordinal(cls, ordinal: int) -> datetime: ...
+    def utcfromtimestamp(cls, timestamp: float) -> datetime: ...  # -> naive
     @classmethod
-    def combine(cls, date: date, time: time) -> datetime: ...
+    def fromordinal(cls, ordinal: int) -> datetime: ...  # -> naive
     @classmethod
-    def strptime(cls, date_string: str, format: str) -> datetime: ...
+    # if time is aware -> aware, else -> naive
+    def combine(cls, date: Union[date, datetime], time: time) -> datetime: ...
+    @classmethod
+    def strptime(cls, date_string: str, format: str) -> datetime: ...  # -> aware and naive
     @property
     def year(self) -> int: ...
     @property
@@ -126,13 +148,13 @@ class datetime(Hashable):
     @property
     def microsecond(self) -> int: ...
     @property
-    def tzinfo(self) -> Optional[_tzinfo]: ...
-    def __add__(self, other: timedelta) -> datetime: ...
+    def tzinfo(self) -> _Aware: ...
+    def __add__(self, other: timedelta) -> datetime: ...  # -> _Aware
     @overload
-    def __sub__(self, other: timedelta) -> datetime: ...
+    def __sub__(self, other: timedelta) -> datetime: ...  # -> _Aware
     @overload
-    def __sub__(self, other: datetime) -> timedelta: ...
-    def __lt__(self, other: datetime) -> bool: ...
+    def __sub__(self, other: datetime) -> timedelta: ...  # (_Aware, _Aware) -> _Aware else invalid
+    def __lt__(self, other: datetime) -> bool: ...  # (
 #    def __le__(self, other: datetime) -> bool: ...
 #    def __ge__(self, other: datetime) -> bool: ...
 #    def __gt__(self, other: datetime) -> bool: ...
