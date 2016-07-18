@@ -2,15 +2,22 @@
 
 # NOTE: These are incomplete!
 
-from typing import Optional, SupportsAbs, Tuple, Union, overload
+from typing import (
+    Optional, SupportsAbs, Tuple, Union,
+    Generic, TypeVar,
+    overload,
+)
+
+_T = TypeVar('_T', None, timedelta)
 
 MINYEAR = 0
 MAXYEAR = 0
 
-class tzinfo:
+
+class tzinfo(Generic[_T]):
     def tzname(self, dt: Optional[datetime]) -> str: ...
-    def utcoffset(self, dt: Optional[datetime]) -> int: ...
-    def dst(self, dt: Optional[datetime]) -> int: ...
+    def utcoffset(self, dt: Optional[datetime]) -> _T: ...
+    def dst(self, dt: Optional[datetime]) -> _T: ...
     def fromutc(self, dt: datetime) -> datetime: ...
 
 class timezone(tzinfo):
