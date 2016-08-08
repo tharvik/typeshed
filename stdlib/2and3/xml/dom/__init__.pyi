@@ -1,6 +1,6 @@
 # Stubs for xml.dom
 
-from typing import Callable
+from typing import Callable, Optional, Sequence, Tuple
 #from .domreg import getDOMImplementation as getDOMImplementation, registerDOMImplementation as registerDOMImplementation
 
 def registerDOMImplementation(name: str,
@@ -12,6 +12,14 @@ XML_NAMESPACE = ...  # type: str
 XMLNS_NAMESPACE = ...  # type: str
 XHTML_NAMESPACE = ...  # type: str
 
+
+class DomImplementation:
+    def hasFeature(self, feature: str, version: str) -> bool: ...
+    def createDocument(self, namespaceUri: Optional[str],
+                       qualifiedName: Optional[str],
+                       doctype: Optional[str]) -> Document: ...
+    def createDocumentType(self, qualifiedName: str, publicId: str,
+                           systemId: str) -> DocumentType: ...
 
 #class Node:
 #    ELEMENT_NODE = ...  # type: Any
@@ -103,4 +111,5 @@ XHTML_NAMESPACE = ...  # type: str
 
 #EMPTY_PREFIX = ...  # type: Any
 
-class DomImplementation: ...
+class Document: ...
+class DocumentType: ...
