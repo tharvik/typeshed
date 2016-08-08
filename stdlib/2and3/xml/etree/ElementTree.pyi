@@ -1,7 +1,7 @@
 # Stubs for xml.etree.ElementTree
 
 from typing import (
-    IO, Iterator, Mapping, MutableMapping, Optional, Sequence, Sized, Tuple, Union,
+    IO, Iterator, Iterable, Mapping, MutableMapping, Optional, Sequence, Sized, Tuple, Union,
     TypeVar, overload
 )
 import sys
@@ -46,12 +46,8 @@ def XML(text: str, parser: Optional[XMLParserType] = ...) -> Element: ...
 def XMLID(text: str,
           parser: Optional[XMLParserType] = ...) -> Tuple[Element, Mapping[str, Element]]: ...
 
-#VERSION = ...  # type: Any
 
-#class ParseError(SyntaxError): ...
-
-
-class Element(Sized):
+class Element(Iterable[Element], Sized):
     tag = ...  # type: str
     text = ...  # type: Optional[str]
     tail = ...  # type: Optional[str]
@@ -85,20 +81,9 @@ class Element(Sized):
     def __delitem__(self, index: int) -> None: ...
     def __getitem__(self, index: int) -> Element: ...
     def __setitem__(self, index: int, element: Element) -> None: ...
+    def __len__(self) -> int: ...
+    def __iter__(self) -> Iterator[Element]: ...
 
-
-#PI = ...  # type: Any
-
-#class QName:
-#    text = ...  # type: Any
-#    def __init__(self, text_or_uri, tag=None): ...
-#    def __hash__(self): ...
-#    def __le__(self, other): ...
-#    def __lt__(self, other): ...
-#    def __ge__(self, other): ...
-#    def __gt__(self, other): ...
-#    def __eq__(self, other): ...
-#    def __ne__(self, other): ...
 
 class ElementTree:
     def __init__(self, element: Optional[Element] = ...,
@@ -127,6 +112,17 @@ class ElementTree:
                   xml_declaration: Optional[bool] = ...,
                   default_namespace: Optional[str] = ...,
                   method: Optional[str] = ...) -> None: ...
+
+
+class QName:
+    def __init__(self, text_or_uri: str, tag: Optional[str] = ...) -> None: ...
+
+#VERSION = ...  # type: Any
+
+#class ParseError(SyntaxError): ...
+
+
+#PI = ...  # type: Any
 
 
 #class _ListDataStream(io.BufferedIOBase):
