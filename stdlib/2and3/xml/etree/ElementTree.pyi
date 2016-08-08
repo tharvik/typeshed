@@ -143,7 +143,9 @@ class XMLPullParser:
 
 #VERSION = ...  # type: Any
 
-#class ParseError(SyntaxError): ...
+class ParseError:
+    code = ...  # type: int
+    position = ...  # type: Tuple[int, int]
 
 
 #PI = ...  # type: Any
