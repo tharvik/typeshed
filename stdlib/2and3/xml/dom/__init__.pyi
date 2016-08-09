@@ -73,6 +73,15 @@ class NodeList(Sized):
     def __getitem__(self, i: int) -> Optional[Node]: ...
 
 
+class DocumentType(Node):
+    publicId = ...  # type: Optional[str]
+    systemId = ...  # type: Optional[str]
+    internalSubset = ...  # type: Optional[str]
+    name = ...  # type: str
+    entities = ...  # type: Optional[NamedNodeMap]
+    notations = ...  # type: Optional[NamedNodeMap]
+
+
 #INDEX_SIZE_ERR = ...  # type: Any
 #DOMSTRING_SIZE_ERR = ...  # type: Any
 #HIERARCHY_REQUEST_ERR = ...  # type: Any
@@ -150,5 +159,4 @@ class NodeList(Sized):
 #EMPTY_PREFIX = ...  # type: Any
 
 class Document: ...
-class DocumentType: ...
 class NamedNodeMap: ...
