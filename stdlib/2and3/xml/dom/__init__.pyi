@@ -118,6 +118,12 @@ class Element(Node):
                        value: node) -> None: ...
 
 
+class Attr(Node):
+    name = ...  # type: str
+    @property
+    def localName(self) -> str: ...
+    prefix = ...  # type: str
+    name = ...  # type: Optional[str]
 
 
 #INDEX_SIZE_ERR = ...  # type: Any
