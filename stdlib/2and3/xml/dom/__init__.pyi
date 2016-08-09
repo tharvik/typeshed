@@ -146,73 +146,86 @@ class ProcessingInstruction(Node):
     data = ...  # type: str
 
 
-#INDEX_SIZE_ERR = ...  # type: Any
-#DOMSTRING_SIZE_ERR = ...  # type: Any
-#HIERARCHY_REQUEST_ERR = ...  # type: Any
-#WRONG_DOCUMENT_ERR = ...  # type: Any
-#INVALID_CHARACTER_ERR = ...  # type: Any
-#NO_DATA_ALLOWED_ERR = ...  # type: Any
-#NO_MODIFICATION_ALLOWED_ERR = ...  # type: Any
-#NOT_FOUND_ERR = ...  # type: Any
-#NOT_SUPPORTED_ERR = ...  # type: Any
-#INUSE_ATTRIBUTE_ERR = ...  # type: Any
-#INVALID_STATE_ERR = ...  # type: Any
-#SYNTAX_ERR = ...  # type: Any
-#INVALID_MODIFICATION_ERR = ...  # type: Any
-#NAMESPACE_ERR = ...  # type: Any
-#INVALID_ACCESS_ERR = ...  # type: Any
-#VALIDATION_ERR = ...  # type: Any
+class DOMException(Exception):
+    @property
+    def code(self) -> int: ...
 
-#class DOMException(Exception):
-#    def __init__(self, *args, **kw): ...
+class DomstringSizeErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class IndexSizeErr(DOMException):
-#    code = ...  # type: Any
+class HierarchyRequestErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class DomstringSizeErr(DOMException):
-#    code = ...  # type: Any
+class IndexSizeErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class HierarchyRequestErr(DOMException):
-#    code = ...  # type: Any
+class InuseAttributeErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class WrongDocumentErr(DOMException):
-#    code = ...  # type: Any
+class InvalidAccessErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class InvalidCharacterErr(DOMException):
-#    code = ...  # type: Any
+class InvalidCharacterErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class NoDataAllowedErr(DOMException):
-#    code = ...  # type: Any
+class InvalidModificationErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class NoModificationAllowedErr(DOMException):
-#    code = ...  # type: Any
+class InvalidStateErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class NotFoundErr(DOMException):
-#    code = ...  # type: Any
+class NamespaceErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class NotSupportedErr(DOMException):
-#    code = ...  # type: Any
+class NotFoundErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class InuseAttributeErr(DOMException):
-#    code = ...  # type: Any
+class NotSupportedErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class InvalidStateErr(DOMException):
-#    code = ...  # type: Any
+class NoDataAllowedErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class SyntaxErr(DOMException):
-#    code = ...  # type: Any
+class NoModificationAllowedErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class InvalidModificationErr(DOMException):
-#    code = ...  # type: Any
+class SyntaxErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class NamespaceErr(DOMException):
-#    code = ...  # type: Any
+class WrongDocumentErr(DOMException):
+    @property
+    def code(self) -> int: ...
 
-#class InvalidAccessErr(DOMException):
-#    code = ...  # type: Any
+DOMSTRING_SIZE_ERR = ...  # type: int
+HIERARCHY_REQUEST_ERR = ...  # type: int
+INDEX_SIZE_ERR = ...  # type: int
+INUSE_ATTRIBUTE_ERR = ...  # type: int
+INVALID_ACCESS_ERR = ...  # type: int
+INVALID_CHARACTER_ERR = ...  # type: int
+INVALID_MODIFICATION_ERR = ...  # type: int
+INVALID_STATE_ERR = ...  # type: int
+NAMESPACE_ERR = ...  # type: int
+NOT_FOUND_ERR = ...  # type: int
+NOT_SUPPORTED_ERR = ...  # type: int
+NO_DATA_ALLOWED_ERR = ...  # type: int
+NO_MODIFICATION_ALLOWED_ERR = ...  # type: int
+SYNTAX_ERR = ...  # type: int
+WRONG_DOCUMENT_ERR = ...  # type: int
 
-#class ValidationErr(DOMException):
-#    code = ...  # type: Any
 
 #class UserDataHandler:
 #    NODE_CLONED = ...  # type: Any
