@@ -1,6 +1,6 @@
 # Stubs for xml.dom
 
-from typing import Callable, Optional, Sequence, Tuple
+from typing import Callable, Optional, Sequence, Sized, Tuple
 
 
 def registerDOMImplementation(name: str,
@@ -65,6 +65,12 @@ class Node:
     def replaceChild(self, newChild: Node, oldChild: Node) -> None: ...
     def normalize(self) -> None: ...
     def cloneNode(self, deep: bool) -> Node: ...
+
+
+class NodeList(Sized):
+    length = ...  # type: int
+    def item(self, i: int) -> Optional[Node]: ...
+    def __getitem__(self, i: int) -> Optional[Node]: ...
 
 
 #INDEX_SIZE_ERR = ...  # type: Any
